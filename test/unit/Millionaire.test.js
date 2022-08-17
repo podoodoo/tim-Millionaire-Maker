@@ -51,20 +51,20 @@ const {
                       raffle.enterRaffle({ value: raffleEntranceFee })
                   ).to.emit(raffle, "MillionaireEnter")
               })
-              //   it("doesn't allow entrance when raffle is calculating", async function () {
-              //       await raffle.enterRaffle({ value: raffleEntranceFee })
+              it("doesn't allow entrance when raffle is calculating", async function () {
+                  await raffle.enterRaffle({ value: raffleEntranceFee })
 
-              //       // https://hardhat.org/hardhat-network/reference
-              //       await network.provider.send("evm_increaseTime", [
-              //           interval.toNumber(),
-              //       ])
-              //       await network.provider.send("evm_mine")
+                  // https://hardhat.org/hardhat-network/reference
+                  await network.provider.send("evm_increaseTime", [
+                      interval.toNumber(),
+                  ])
+                  await network.provider.send("evm_mine")
 
-              //       // pretend to be chainlink keeper
-              //       await raffle.performUpkeep([])
-              //       await expect(
-              //           raffle.enterRaffle({ value: raffleEntranceFee })
-              //       ).to.be.revertedWith("Millionaire__RaffleNotOpen")
-              //   })
+                  // pretend to be chainlink keeper
+                  await raffle.performUpkeep([])
+                  await expect(
+                      raffle.enterRaffle({ value: raffleEntranceFee })
+                  ).to.be.revertedWith("Millionaire__RaffleNotOpen")
+              })
           })
       })
